@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            /* background-color: #ffff33; */
+            margin: 0;
+            padding: 0;
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .opacity{
+            opacity: .4;
+        }
+
+        #step1-heading{
+            background-color: #539dd7;
+            color: white;
+            
+        }
+
+        .calculator-container {
+            width: 36%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 20px 20px 20px 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff200
+        }
+
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #003399;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-left: 88px;
+            width: 90%;
+            margin-top: 12px;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .step.active {
+            border-color: #28a745;
+            color: #28a745;
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background-color: #ccc;
+            margin: 0 10px;
+        }
+
+        .dropdown {
+            margin-bottom: 20px;
+        }
+
+        .btn-next {
+            width: 50%;
+            background-color: #9acd32;
+            color: #fff;
+            border: none;
+            font-size: 18px;
+            margin-bottom: 25px;
+            margin-left: 90px;
+        }
+
+        .btn-next:disabled {
+            background-color: #539dd7;
+            color: #666;
+            border-color: #539dd7;
+            cursor:  not-allowed;
+            opacity: .5;
+            margin-top: 12px;
+        }
+
+        .cal-from {
+            box-sizing: border-box;
+            color: #000000;
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;
+            font-size: 16px;
+            font-weight: inherit;
+            line-height: 1.4;
+            text-size-adjust: 100%;
+        }
+
+        .step-name {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-left: 88px;
+            width: 90%;
+            margin-top: 12px;
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;
+        }
+
+        .step2 {
+            opacity: .4;
+        }
+
+        .device-select-tech {
+            margin-top: 25px;
+        }
+
+        .device-select-year {
+            margin-top: 25px;
+        }
+
+        input[type="radio"] {
+            transform: scale(1.5);
+            margin: 5px;
+        }
+
+        .email{
+            margin-top: 15px;
+        }
+
+        #next-button1{
+            background-color: #539dd7;
+            width:70%;
+            height: 40px;
+            border:none;
+            border-radius: 10px;
+        }
+
+        #next-button1:hover{
+            color: white;
+        }
+
+        #prev-button1{
+            background-color: #539dd7;
+            width: 70%;
+            height: 40px;
+            border:none;
+            border-radius: 10px;
+        }
+
+        #prev-button1:hover{
+            color: white;
+        }
+
+        .btnBox{
+            width: 100%;
+            height: 50px;
+            background-color: red;
+            margin-top: 15px;
+        }
+        .btnBox1{
+            width:40%;
+            height: 50px; 
+            float:left;
+        }
+        .btnBox2{
+            width: 40%;
+            height: 50px;
+            float: right;
+        }
+        .box{
+            background-color:rgba(228, 241, 254);
+            width: 90%;
+            height: auto;
+            margin: auto;
+            margin-bottom: 10%;
+            padding-bottom: 10%;
+            border-left: 3px solid rgba(89, 171, 227);
+            border-radius: 10px;
+        }
+        .box-container{
+            width: 80%;
+            height:auto;
+            background-color:rgba(89, 171, 227);
+            margin: auto;
+        }
+        .btn-box{
+            width: 50%;
+            height: 50px;
+            margin: auto;
+        }
+        .btn0{
+            width: 100%;
+            height: 50px;
+            background-color:rgba(65, 131, 215);
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="calculator-container" id="calculator-container">
+
+        <div class="form-group cal-form" id="form-group-1">
+             <h2 style="font-family: Lucida Grande, Lucida Sans Unicode, Tahoma, sans-seri;">Pricing Calculator</h2>
+
+             <div class="step-indicator">
+                <div class="step active">1</div>
+                <div class="step-line"></div>
+                <div class="step">2</div>
+            </div>
+
+            <div class="step-name">
+                <div class="">Step 1</div>
+                <div class="opacity" id="step-2">Step 2</div>
+            </div>
+
+            <label for="device-select">What device is having issues? <span class="text-danger">*</span></label>
+            <select class="form-control" id="device-select">
+                <option value="">Select...</option>
+                <option value="1">Windows Desktop</option>
+                <option value="2">Windows Laptop</option>
+                <option value="3">Apple Desktop</option>
+                <option value="4">Apple Laptop</option>
+                <option value="5">Other Desktop</option>
+                <option value="6">Other Laptop</option>
+                <option value="7">Tablet (iPad, Kindle, Galaxy, etc)</option>
+                <option value="8">WiFi/Network Equipment</option>
+                <option value="9">Printer</option>
+                <option value="10">Cell Phone</option>
+                <option value="11">Other (not listed)</option>
+            </select>
+
+            <label for="device-select-tech" class="device-select-tech hidden">What tech issue are you having? <span class="text-danger">*</span></label>
+            <select class="form-control hidden" id="device-select-tech">
+                <option value="">Select...</option>
+                <option value="1">Slow performance</option>
+                <option value="2">Doesn't turn on</option>
+                <option value="3">Screen issue</option>
+                <option value="4">Other issue</option>
+            </select>
+
+            <label for="device-select-year" class="device-select-year hidden">Year purchased <span class="text-danger">*</span></label>
+            <select class="form-control hidden" id="device-select-year">
+                <option value="">Select...</option>
+                <option value="1">1998</option>
+                <option value="2">2000</option>
+                <option value="3">2001</option>
+                <option value="4">2002</option>
+                <option value="5">2003</option>
+                <option value="6">2004</option>
+                <option value="7">2005</option>
+                <option value="8">2006</option>
+                <option value="9">2007</option>
+                <option value="10">2010</option>
+                <option value="11">Other (not listed)</option>
+            </select>
+
+        </div>
+
+        <button class="btn btn-next" id="next-button" disabled>Next</button>
+
+    </div>
+
+  <div class="calculator-container hidden" id="calculator-container-1">
+    <div class="form-group cal-form" id="form-group-2">
+        <h2 style="font-family: Lucida Grande, Lucida Sans Unicode, Tahoma, sans-seri;">Pricing Calculator</h2>
+
+        <div class="step-indicator">
+           <div class="step active" id="step1-heading">1</div>
+           <div class="step-line"></div>
+           <div class="step">2</div>
+       </div>
+
+       <div class="step-name">
+           <div class="">Step 1</div>
+           <div class="" id="step-2">Step 2</div>
+       </div>
+
+    <div id="step2-content" class="step-content" style="margin-bottom: 20%;">
+
+        <label for="repair-location">Repair Location <span class="text-danger">*</span></label>
+        <div>
+            <input type="radio" id="nerds-shop" name="repair-location" value="Nerds on Call Shop">
+            <label for="nerds-shop">Nerds on Call Shop</label><br>
+            <input type="radio" id="residential-onsite" name="repair-location" value="Residential Onsite">
+            <label for="residential-onsite">Residential Onsite</label><br>
+            <input type="radio" id="business-onsite" name="repair-location" value="Business Onsite">
+            <label for="business-onsite">Business Onsite</label>
+        </div>
+
+        <label for="email" class="email">Email Address <span class="text-danger">*</span></label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+
+        <div class="mt-5">
+        <div class="btnBox1 ml-5"><button id="next-button1">Previous</button></div>
+        <div class="btnBox2"><button id="prev-button1">Submit</button></div></div>
+        <!-- <div class="row">
+            <div class="col-lg-2">
+                <button class="btn btn-next " id="next-button1">Next</button>
+            </div>
+            <div class="col-lg-8">
+                <button class="btn btn-next " id="prev-button1">Previous</button>
+            </div>
+        </div> -->
+       
+    </div>
+
+    
+    
+</div>
+</div>
+
+<div class="calculator-container hidden" id="calculator-container-2" style="margin-bottom: 10%;">
+   <div class="box">
+    <h2 style="margin-left:10%; margin-top: 5%;"><Strong>Prices starting from:</Strong></h2>
+    <h3 style="margin-left:10%;"><strong>$99: In-shop repair</strong></h3>
+    <h3 style="margin-left:10%;"><strong>$189: Residential On-site repair</strong></h3>
+    <p style="margin-left:10%;"><strong>*Replacement parts will incur an additional fee.</strong></p>
+    <p style="margin-left:10%;"><strong>Note:</strong>
+    Prices may vary depending on your specific device’s condition, issue and location. An email with more information has been sent to you.</p>
+    <div class="box-container">
+        <h3><strong>A Nerd will contact you soon for a personal estimate</strong></h3>
+       </div>
+       <h3 style="text-align: center;"><strong>Ready to start your repair?</strong></h3>
+       <div class="btn-box">
+        <button class="btn0">Book In-Shop Service</button>
+       </div>
+   </div>
+
+  
+</div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+
+        const deviceSelect = document.getElementById('device-select');
+        const techSelect = document.getElementById('device-select-tech');
+        const yearSelect = document.getElementById('device-select-year');
+        const nextButton = document.getElementById('next-button');
+
+        const prevButton = document.getElementById('prev-button');
+        const fromGroup = document.getElementById('form-group-1');
+
+        const techLabel = document.querySelector('.device-select-tech');
+        const yearLabel = document.querySelector('.device-select-year');
+        const step2Label = document.getElementById('step-2');
+
+        const step1Content   = document.getElementById('calculator-container');
+        const step2Content   = document.getElementById('calculator-container-1');
+        const step3Content   = document.getElementById('calculator-container-2');
+        const step1Indicator = document.getElementById('step1-indicator');
+        const step2Indicator = document.getElementById('step2-indicator'); 
+
+        const step1heading = document.getElementById('step1-heading');
+        const btnPrevious  = document.getElementById('next-button1');
+        const btnSubmit    = document.getElementById('prev-button1');
+
+        // Function to check if all select boxes have values
+        function checkSelectValues() {
+            if (deviceSelect.value && techSelect.value && yearSelect.value) {
+                nextButton.removeAttribute('disabled'); // Enable the button
+                step2Label.classList.remove('opacity'); 
+            } else {
+                nextButton.setAttribute('disabled', 'disabled'); // Keep it disabled
+            }
+        }
+
+        // Show other select boxes based on the first dropdown's value
+        deviceSelect.addEventListener('change', function () {
+            if (deviceSelect.value) {
+                techSelect.classList.remove('hidden');
+                yearSelect.classList.remove('hidden');
+                techLabel.classList.remove('hidden');
+                yearLabel.classList.remove('hidden');
+            } else {
+                techSelect.classList.add('hidden');
+                yearSelect.classList.add('hidden');
+                techLabel.classList.add('hidden');
+                yearLabel.classList.add('hidden');
+            }
+            checkSelectValues();
+        });
+
+        // Add event listeners to all dropdowns
+        techSelect.addEventListener('change', checkSelectValues);
+        yearSelect.addEventListener('change', checkSelectValues);
+
+       nextButton.addEventListener('click', function () {
+            //fromGroup.classList.add('hidden');
+            step1Content.classList.add('hidden');
+            step2Content.classList.remove('hidden');
+       });
+
+       btnPrevious.addEventListener('click', function () {
+        step1Content.classList.remove('hidden');
+        step2Content.classList.add('hidden');
+       });
+
+       btnSubmit.addEventListener('click', function () {
+        step3Content.classList.remove('hidden');
+        step2Content.classList.add('hidden');
+       });
+        // Move to the previous step
+        prevButton.addEventListener('click', () => {
+            step2Content.classList.add('hidden'); // Hide step 2 content
+            step1Content.classList.remove('hidden'); // Show step 1 content
+            nextButton.classList.remove('hidden'); // Show next button for step 1
+            prevButton.classList.add('hidden'); // Hide previous button for step 1
+
+            step2Label.classList.add('opacity');
+            step2Label.classList.remove('active');
+        });
+
+    </script>
+</body>
+</html>
