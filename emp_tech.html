@@ -345,7 +345,7 @@
        </div>
        <h3 style="text-align: center;"><strong>Ready to start your repair?</strong></h3>
        <div class="btn-box">
-        <button class="btn0">Book In-Shop Service</button>
+        <button class="btn0" id="btnBooking">Book In-Shop Service</button>
        </div>
    </div>
 
@@ -356,9 +356,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 
     <script>
 
+        let savedData = [];
         const deviceSelect = document.getElementById('device-select');
         const techSelect = document.getElementById('device-select-tech');
         const yearSelect = document.getElementById('device-select-year');
@@ -380,6 +383,14 @@
         const step1heading = document.getElementById('step1-heading');
         const btnPrevious  = document.getElementById('next-button1');
         const btnSubmit    = document.getElementById('prev-button1');
+
+        //for fetch Data from Fields..
+        // const issueSelectbox = document.getElementById('device-select').value;
+        // const techSelectbox  = document.getElementById('device-select-tech').value;
+        // const yearSelectbox  = document.getElementById('device-select-year').value;
+        // const radioBtnValue  = document.getElementsByName('repair-location').value;
+        // const emailFld       = document.getElementsById('email').value;
+        const btnBooking          = document.getElementById('btnBooking');
 
         // Function to check if all select boxes have values
         function checkSelectValues() {
@@ -426,16 +437,32 @@
         step3Content.classList.remove('hidden');
         step2Content.classList.add('hidden');
        });
-        // Move to the previous step
-        prevButton.addEventListener('click', () => {
-            step2Content.classList.add('hidden'); // Hide step 2 content
-            step1Content.classList.remove('hidden'); // Show step 1 content
-            nextButton.classList.remove('hidden'); // Show next button for step 1
-            prevButton.classList.add('hidden'); // Hide previous button for step 1
 
-            step2Label.classList.add('opacity');
-            step2Label.classList.remove('active');
-        });
+       btnBooking.addEventListener('click', function () {
+            const issueSelectbox = document.getElementById('device-select').value;
+            const techSelectbox  = document.getElementById('device-select-tech').value;
+            const yearSelectbox  = document.getElementById('device-select-year').value;
+            const radioBtnValue  = document.querySelector('input[name="repair-location"]:checked').value; //document.getElementByName('repair-location').value;
+            const emailFld       = document.getElementById('email').value;
+
+            if (!issueSelectbox || !techSelectbox || !yearSelectbox || !radioBtnValue || !emailFld) 
+            {
+                alert('Please fill all fields');
+            }
+
+            const formData = { IssueName: issueSelectbox, TechIssueName: techSelectbox, Year: yearSelectbox, RepairLocation: radioBtnValue, Email: emailFld };
+            savedData.push(formData);
+
+            if (savedData.length === 0) 
+            {
+               alert('No data have to export!');
+            }
+
+            const worksheet = XLSX.utils.json_to_sheet(savedData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+            XLSX.writeFile(workbook, 'Booking-Data.xlsx');
+       });
 
     </script>
 </body>
