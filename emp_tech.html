@@ -23,9 +23,13 @@
         }
 
         #step1-heading{
-            background-color: #539dd7;
+            background-color: #28a745;
             color: white;
             
+        }
+
+        .white{
+            color: white;
         }
 
         .calculator-container {
@@ -35,7 +39,7 @@
             border-radius: 20px 20px 20px 20px;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #fff200
+            background-color: #e44a3a;
         }
 
         .header {
@@ -147,7 +151,7 @@
         }
 
         #next-button1{
-            background-color: #539dd7;
+            background-color: #28a745;
             width:70%;
             height: 40px;
             border:none;
@@ -159,7 +163,7 @@
         }
 
         #prev-button1{
-            background-color: #539dd7;
+            background-color: #28a745;
             width: 70%;
             height: 40px;
             border:none;
@@ -223,20 +227,20 @@
     <div class="calculator-container" id="calculator-container">
 
         <div class="form-group cal-form" id="form-group-1">
-             <h2 style="font-family: Lucida Grande, Lucida Sans Unicode, Tahoma, sans-seri;">Pricing Calculator</h2>
+             <h2 class="white" style="font-family: Lucida Grande, Lucida Sans Unicode, Tahoma, sans-seri;">Pricing Calculator</h2>
 
              <div class="step-indicator">
-                <div class="step active">1</div>
+                <div class="step active white">1</div>
                 <div class="step-line"></div>
-                <div class="step">2</div>
+                <div class="step white">2</div>
             </div>
 
             <div class="step-name">
-                <div class="">Step 1</div>
-                <div class="opacity" id="step-2">Step 2</div>
+                <div class="white">Step 1</div>
+                <div class="opacity white" id="step-2">Step 2</div>
             </div>
 
-            <label for="device-select">What device is having issues? <span class="text-danger">*</span></label>
+            <label for="device-select" class="white">What device is having issues? <span class="text-warning">*</span></label>
             <select class="form-control" id="device-select">
                 <option value="">Select...</option>
                 <option value="1">Windows Desktop</option>
@@ -252,7 +256,7 @@
                 <option value="11">Other (not listed)</option>
             </select>
 
-            <label for="device-select-tech" class="device-select-tech hidden">What tech issue are you having? <span class="text-danger">*</span></label>
+            <label for="device-select-tech" class="device-select-tech hidden white">What tech issue are you having? <span class="text-warning">*</span></label>
             <select class="form-control hidden" id="device-select-tech">
                 <option value="">Select...</option>
                 <option value="1">Slow performance</option>
@@ -261,7 +265,7 @@
                 <option value="4">Other issue</option>
             </select>
 
-            <label for="device-select-year" class="device-select-year hidden">Year purchased <span class="text-danger">*</span></label>
+            <label for="device-select-year" class="device-select-year hidden white">Year purchased <span class="text-warning">*</span></label>
             <select class="form-control hidden" id="device-select-year">
                 <option value="">Select...</option>
                 <option value="1">1998</option>
@@ -285,32 +289,32 @@
 
   <div class="calculator-container hidden" id="calculator-container-1">
     <div class="form-group cal-form" id="form-group-2">
-        <h2 style="font-family: Lucida Grande, Lucida Sans Unicode, Tahoma, sans-seri;">Pricing Calculator</h2>
+        <h2 class="white" style="font-family: Lucida Grande, Lucida Sans Unicode, Tahoma, sans-seri;">Pricing Calculator</h2>
 
         <div class="step-indicator">
-           <div class="step active" id="step1-heading">1</div>
+           <div class="step active white" id="step1-heading">1</div>
            <div class="step-line"></div>
-           <div class="step">2</div>
+           <div class="step white">2</div>
        </div>
 
        <div class="step-name">
-           <div class="">Step 1</div>
-           <div class="" id="step-2">Step 2</div>
+           <div class="white">Step 1</div>
+           <div class="white" id="step-2">Step 2</div>
        </div>
 
     <div id="step2-content" class="step-content" style="margin-bottom: 20%;">
 
-        <label for="repair-location">Repair Location <span class="text-danger">*</span></label>
+        <label for="repair-location" class="white">Repair Location <span class="text-warning">*</span></label>
         <div>
             <input type="radio" id="nerds-shop" name="repair-location" value="Nerds on Call Shop">
-            <label for="nerds-shop">Nerds on Call Shop</label><br>
+            <label for="nerds-shop" class="white">Amp Tech on Call Shop</label><br>
             <input type="radio" id="residential-onsite" name="repair-location" value="Residential Onsite">
-            <label for="residential-onsite">Residential Onsite</label><br>
+            <label for="residential-onsite" class="white">Residential Onsite</label><br>
             <input type="radio" id="business-onsite" name="repair-location" value="Business Onsite">
-            <label for="business-onsite">Business Onsite</label>
+            <label for="business-onsite" class="white">Business Onsite</label>
         </div>
 
-        <label for="email" class="email">Email Address <span class="text-danger">*</span></label>
+        <label for="email" class="email white">Email Address <span class="text-danger">*</span></label>
         <input type="email" class="form-control" id="email" placeholder="Enter your email">
 
         <div class="mt-5">
@@ -341,7 +345,7 @@
     <p style="margin-left:10%;"><strong>Note:</strong>
     Prices may vary depending on your specific device’s condition, issue and location. An email with more information has been sent to you.</p>
     <div class="box-container">
-        <h3><strong>A Nerd will contact you soon for a personal estimate</strong></h3>
+        <h3><strong>A Amp Tech will contact you soon for a personal estimate</strong></h3>
        </div>
        <h3 style="text-align: center;"><strong>Ready to start your repair?</strong></h3>
        <div class="btn-box">
